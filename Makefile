@@ -1,7 +1,7 @@
 #Makefile for Helm Operations
 REPO ?= unstructured-api
 GIT_TAG = $(shell git describe --tags $(git rev-list --tags --max-count=1) | sed s/v//g)
-VERSION ?= $(shell cat cash-app/Chart.yaml | grep "version:" | awk -F': ' '{print $$2}')
+VERSION ?= $(shell cat ${REPO}/Chart.yaml | grep "version:" | awk -F': ' '{print $$2}')
 NEXT_VERSION ?= $(shell echo ${VERSION} | awk -F. -v OFS=. '{$$NF += 1 ; print}')
 
 package: ## Packages the helm chart
@@ -18,12 +18,6 @@ template: ## Runs helm template with default values
 	helm template ${REPO}
 
 .PHONY: template
-
-template-devops: ## Runs helm template with devops test values
-	helm template -f devops-values.yaml ${REPO} ${REPO}
-
-.PHONY: template-devops
-
 
 lint: ## Runs helm lint
 	helm lint ${REPO}
