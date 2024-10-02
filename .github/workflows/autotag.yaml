@@ -20,5 +20,5 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GIT_TOKEN }}"
         with:
           strategy: regex
-          root: "./unstructured-api/Chart.yaml"
+          root: "./charts/unstructured-api/Chart.yaml"
           regex_pattern: "version: ([0-9\\.]{3,}([-\\+][\\w\\.0-9]+)?)"

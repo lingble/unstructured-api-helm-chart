@@ -1,6 +1,10 @@
 # Unofficial Unstructured API Helm Chart
 
+I am not affilated with [Unstructured-IO](https://github.com/Unstructured-IO) I just like their product and want to run it in Kubernetes.
+
 This is an unofficial Helm chart repository for the Unstructured API: [unstructured-api](https://github.com/Unstructured-IO/unstructured-api) used for document loading in LLM RAG Applications. The Helm chart is a wrapper that makes it easy to deploy the Unstructured API on a Kubernetes cluster.
+
+Please use at your own risk!
 
 ## Table of Contents
 
@@ -20,8 +24,13 @@ This Helm chart wraps the Unstructured API for easy deployment on Kubernetes clu
 
 To install the chart, follow these steps:
 
-1. Add the chart repository: `helm repo add unstructured-api https://kkacsh321.github.io/unstructured-api-helm-chart/`
-2. Install the chart: `helm install unstructured-api unstructured-api/unstructured-api`
+1. Add the chart repository: `helm repo add unstructured-api https://kkacsh321.github.io/unstructured-api-helm-chart`
+
+2. See the version of chart: `helm search repo unstructured-api`
+
+3. Install the chart: `helm install unstructured-api unstructured-api/unstructured-api -n <namespace>`
+
+4. or with a values file `helm install unstructured-api unstructured-api/unstructured-api -n <namespace> -f values.yaml`
 
 ## Usage
 
@@ -112,7 +121,7 @@ securityContext: {}
 
 service:
   type: NodePort
-  port: 30008
+  port: 8000
 
 ingress:
   enabled: false
