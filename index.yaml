@@ -3,6 +3,19 @@ entries:
   unstructured-api:
   - apiVersion: v2
     appVersion: 0.0.80
+    created: "2024-10-02T16:50:50.630366668Z"
+    description: A Helm chart for Unstructured-API
+    digest: 90a8dee9cd3d3990df4fb1a5c90959154d5981e8b785485de632da1b22a5b098
+    icon: https://avatars.githubusercontent.com/u/108372208?s=48&v=4
+    maintainers:
+    - name: kkacsh321
+    name: unstructured-api
+    type: application
+    urls:
+    - https://github.com/kkacsh321/unstructured-api-helm-chart/releases/download/unstructured-api-0.0.3/unstructured-api-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: 0.0.80
     created: "2024-10-01T19:08:35.515048-06:00"
     description: A Helm chart for Unstructured-API
     digest: 618728eed262f1729bb6a784f43f1dd04dec91e2037cf2bcd0fe05b319f8e6c0
@@ -12,4 +25,4 @@ entries:
     urls:
     - https://kkacsh321.github.io/unstructured-api-helm-chart/charts/unstructured-api-0.0.2.tgz
     version: 0.0.2
-generated: "2024-10-01T19:08:35.51447-06:00"
+generated: "2024-10-02T16:50:50.630378754Z"
