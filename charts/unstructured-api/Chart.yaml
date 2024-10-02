@@ -4,7 +4,7 @@ description: A Helm chart for Unstructured-API
 icon: https://avatars.githubusercontent.com/u/108372208?s=48&v=4
 type: application
 maintainers:
-  - name: kkacsh321 # Keith Kacsh
+  - name: kkacsh321
 version: 0.0.3
 
 appVersion: "0.0.80"
