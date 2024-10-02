@@ -5,7 +5,12 @@ VERSION ?= $(shell cat ${REPO}/Chart.yaml | grep "version:" | awk -F': ' '{print
 NEXT_VERSION ?= $(shell echo ${VERSION} | awk -F. -v OFS=. '{$$NF += 1 ; print}')
 
 package: ## Packages the helm chart
-	helm package ${REPO}
+	helm package charts/${REPO} --destination charts/
+
+.PHONY: package
+
+index: ## Packages the helm chart
+	Helm repo index --url https://kkacsh321.github.io/unstructured-api-helm-chart .  
 
 .PHONY: package
 
@@ -15,12 +20,22 @@ push: ## Pushes helm chart to ECR
 .PHONY: push
 
 template: ## Runs helm template with default values
-	helm template ${REPO}
+	helm template charts/${REPO}
+
+.PHONY: template
+
+template-test: ## Runs helm template with default values
+	helm template charts/${REPO} -f test-values.yaml
 
 .PHONY: template
 
 lint: ## Runs helm lint
-	helm lint ${REPO}
+	helm lint charts/${REPO}
+
+.PHONY: lint
+
+ct: ## Runs helm chart-testing
+	ct lint charts/${REPO}
 
 .PHONY: lint
 
@@ -37,9 +52,9 @@ check-version: ## Checks for the required version bump
 bump-version: ## bump minor version
 	@echo "Current version in repo is \033[0;31m${VERSION}\033[0m"; \
 	echo "New version will be \033[0;32m${NEXT_VERSION}\033[0m"; \
-	sed 's/'${VERSION}'/'${NEXT_VERSION}'/g' ./${REPO}/Chart.yaml > Chart.tmp; \
-	rm ./${REPO}/Chart.yaml; \
-	mv Chart.tmp ./${REPO}/Chart.yaml; \
+	sed 's/'${VERSION}'/'${NEXT_VERSION}'/g' ./charts/${REPO}/Chart.yaml > Chart.tmp; \
+	rm ./cahrts/${REPO}/Chart.yaml; \
+	mv Chart.tmp ./charts/${REPO}/Chart.yaml; \
 	echo "Version now set to \033[36m${NEXT_VERSION}\033[0m"
 .PHONY: bump-version
 
@@ -47,7 +62,7 @@ version: ## Prints Current Version
 	@echo "Current version in repo is \033[0;31m${VERSION}\033[0m"
 .PHONY: version
 
-prepare-pr: lint check-version ## Runs helm lint, and version check for before your PR
+prepare-pr: lint ct check-version package index ## Runs helm lint, and version check for before your PR
 	@echo "\033[36m"Done Running PR Checks"\033[0m"
 .PHONY: prepare-pr
 
