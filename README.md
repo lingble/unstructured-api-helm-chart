@@ -20,7 +20,7 @@ This Helm chart wraps the Unstructured API for easy deployment on Kubernetes clu
 
 To install the chart, follow these steps:
 
-1. Add the chart repository: `helm repo add unstructured-api https://your-repo-url.github.io/unstructured-api-helm-chart`
+1. Add the chart repository: `helm repo add unstructured-api https://kkacsh321.github.io/unstructured-api-helm-chart/`
 2. Install the chart: `helm install unstructured-api unstructured-api/unstructured-api`
 
 ## Usage

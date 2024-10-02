@@ -1,0 +1,24 @@
+name: AutoTag
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  docker:
+    name: Autotag
+    runs-on: unstructured-api-runner
+
+    permissions: write-all
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: butlerlogic/action-autotag@1.1.2
+        env:
+          GITHUB_TOKEN: "${{ secrets.GIT_TOKEN }}"
+        with:
+          strategy: regex
+          root: "./unstructured-api/Chart.yaml"
+          regex_pattern: "version: ([0-9\\.]{3,}([-\\+][\\w\\.0-9]+)?)"
