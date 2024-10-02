@@ -34,6 +34,11 @@ lint: ## Runs helm lint
 
 .PHONY: lint
 
+ct: ## Runs helm chart-testing
+	ct lint charts/${REPO}
+
+.PHONY: lint
+
 check-version: ## Checks for the required version bump
 	@echo "\033[36m"Checking Version"\033[0m"; \
 	if [ "${GIT_TAG}" == "${VERSION}" ]; then \
@@ -57,7 +62,7 @@ version: ## Prints Current Version
 	@echo "Current version in repo is \033[0;31m${VERSION}\033[0m"
 .PHONY: version
 
-prepare-pr: lint check-version package index ## Runs helm lint, and version check for before your PR
+prepare-pr: lint ct check-version package index ## Runs helm lint, and version check for before your PR
 	@echo "\033[36m"Done Running PR Checks"\033[0m"
 .PHONY: prepare-pr
 
